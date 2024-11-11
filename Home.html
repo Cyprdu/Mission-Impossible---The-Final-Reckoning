@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission: Impossible - The Final Reckoning</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="favico.png" type="image/png">
+
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        @font-face {
+            font-family: 'IMPOS10';
+            src: url('IMPOS10_.ttf') format('truetype');
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video">
+            <source src="Arrière-Plan.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <img src="https://image.tmdb.org/t/p/original/rvbIIwPM4lx2XNVFpW9svwdt8kg.png" alt="Mission Impossible Logo" class="movie-logo">
+        <p class="release-date">AU CINÉMA 21 MAI 2025</p>
+    </div>
+
+    <!-- Menu Icon -->
+    <div class="menu-icon" id="menu-toggle">
+        <img src="https://img.icons8.com/m_rounded/512/FFFFFF/menu.png" alt="Menu Icon">
+    </div>
+
+    <!-- Cross Icon for Closing Menu -->
+    <div class="menu-icon-cross" id="cross-icon" style="display: none;">
+        <img src="croix.png" alt="Close Icon">
+    </div>
+
+    <!-- Sliding Menu -->
+    <nav class="menu" id="menu">
+        <a href="#" class="active">Accueil</a>
+        <a href="#synopsis" class="scroll-link">Synopsis</a>
+        <a href="#video">Vidéo</a>
+        <a href="https://www.allocine.fr/film/fichefilm_gen_cfilm=270936.html" target="_blank">Séance</a>
+    </nav>
+
+    <!-- Reserve Button -->
+    <a href="https://www.allocine.fr/film/fichefilm_gen_cfilm=270936.html" class="reserve-button"><b>Réservez vos places</b></a>
+
+    <!-- Synopsis Section -->
+    <div id="synopsis" class="synopsis">
+        <div class="synopsis-content">
+            <img src="Affiche.jpg" alt="Affiche" class="synopsis-poster">
+            <div class="synopsis-text">
+                <h1>Mission: Impossible - The Final Reckoning</h1>
+                <p>
+                   Ethan Hunt et l’équipe du FMI sont chargés de retrouver une arme de destruction massive d’une puissance inédite, qui menace l’humanité si elle tombe entre de mauvaises mains. Dans une course effrénée à travers le globe, l’équipe doit affronter des ennemis redoutables et des alliances incertaines, tout en étant confrontée à des pièges mortels et des trahisons. Avec l’avenir du monde en jeu, chaque seconde compte, et les agents devront faire face à des choix impossibles pour empêcher la catastrophe mondiale imminente.
+                </p>
+                <!-- Bouton vidéo sous le synopsis -->
+                <div class="video-button-container">
+                    <a href="#video" class="video-button">Regarder la vidéo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Section -->
+    <!-- Conteneur de la vidéo YouTube -->
+    <div class="video-container" id="video">
+        <iframe src="https://www.youtube.com/embed/gRUfxseMlbg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <img src="https://dx35vtwkllhj9.cloudfront.net/paramountpictures/mission-impossible-dead-reckoning-part-1/images/legal-logos-intl.png" alt="Logos légaux" class="footer-logo">
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
