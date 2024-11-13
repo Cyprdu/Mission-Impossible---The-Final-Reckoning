@@ -15,13 +15,47 @@
             font-family: 'IMPOS10';
             src: url('IMPOS10_.ttf') format('truetype');
         }
+
+        /* Styles pour la vidéo en arrière-plan */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Agrandissement du logo sur mobile */
+        .movie-logo {
+            max-width: 80%;
+        }
+
+        @media (max-width: 768px) {
+            .movie-logo {
+                max-width: 90%;
+                transform: scale(1.2); /* Agrandir le logo sur mobile */
+            }
+        }
+
+        /* Autres styles (si nécessaire) */
     </style>
 </head>
 <body>
 
     <!-- Video Background -->
     <div class="video-background">
-        <video autoplay muted loop id="bg-video">
+        <video autoplay muted loop playsinline id="bg-video">
             <source src="https://cyprienveyret.my.canva.site/cloud/video/06200c62ae58a7a343f0e3031b47ae00.mp4" type="video/mp4">
         </video>
     </div>
