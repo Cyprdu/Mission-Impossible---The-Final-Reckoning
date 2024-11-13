@@ -79,15 +79,3 @@ document.addEventListener('contextmenu', function(e) {
     e.preventDefault(); // Empêche l'ouverture du menu contextuel
 });
 
-document.addEventListener("scroll", () => {
-    const content = document.querySelector(".content");
-    const video = document.getElementById("bg-video");
-
-    const videoBottom = video.getBoundingClientRect().bottom;
-
-    if (videoBottom < window.innerHeight * 0.3) {
-        content.classList.add("hidden");
-    } else {
-        content.classList.remove("hidden");
-    }
-});
