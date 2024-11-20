@@ -17,14 +17,31 @@
             color: white;
         }
 
-        /* Conteneur vidéo de fond */
-        .video-background {
-            position: fixed;
+        /* Conteneur pour le header (texte) */
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 50px 20px;
+            background-color: black;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin: 0;
+            color: red;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: white;
+        }
+
+        /* Vidéo en arrière-plan */
+        .video-container {
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            height: 100vh;
             overflow: hidden;
         }
 
@@ -34,74 +51,30 @@
             object-fit: cover;
         }
 
-        /* Contenu principal */
+        /* Contenu sous la vidéo */
         .content {
+            padding: 20px;
+            background-color: black;
+        }
+
+        .content h2 {
             text-align: center;
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-        }
-
-        .movie-logo {
-            width: 80%;
-            max-width: 300px;
-            margin: 20px auto;
-        }
-
-        .reserve-button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: red;
             color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            width: 80%;
-            max-width: 250px;
         }
 
-        /* Section synopsis */
-        #synopsis {
-            padding: 20px;
+        .content p {
+            color: white;
             text-align: justify;
         }
 
-        .synopsis-poster {
-            width: 100%;
-            max-width: 300px;
-            margin: 20px auto;
-            border-radius: 10px;
+        /* Effet JavaScript : texte caché avec opacité */
+        .fade-text {
+            opacity: 1;
+            transition: opacity 0.5s;
         }
 
-        .synopsis-text {
-            font-size: 0.9rem;
-        }
-
-        /* Bouton vidéo */
-        .video-button-container {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        .video-button {
-            padding: 10px 15px;
-            background-color: red;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        /* Conteneur vidéo */
-        .video-container {
-            padding: 20px;
-            text-align: center;
-        }
-
-        iframe {
-            width: 100%;
-            max-width: 350px;
-            height: 200px;
+        .fade-text.hidden {
+            opacity: 0;
         }
 
         /* Pied de page */
@@ -110,31 +83,23 @@
             padding: 10px;
         }
 
-        .footer-logo {
+        footer img {
             width: 80%;
             max-width: 200px;
-        }
-
-        /* Adaptation mobile */
-        @media screen and (max-width: 768px) {
-            .movie-logo {
-                max-width: 250px;
-            }
-
-            .synopsis-text {
-                font-size: 0.8rem;
-            }
-
-            iframe {
-                height: 180px;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Vidéo de fond -->
-    <div class="video-background">
+    <!-- En-tête avec le texte principal -->
+    <div class="header fade-text" id="header-text">
+        <h1>Tom Cruise</h1>
+        <p>Mission: Impossible - The Final Reckoning</p>
+        <p>Le 23.06.2025 en France</p>
+    </div>
+
+    <!-- Vidéo qui disparaît lors du défilement -->
+    <div class="video-container">
         <video autoplay muted loop playsinline id="bg-video">
             <source src="https://cyprienveyret.my.canva.site/cloud/video/ddb898b808955abd1a13fc718a11a46f.mp4" type="video/mp4">
             Votre navigateur ne supporte pas les vidéos HTML5.
@@ -143,53 +108,33 @@
 
     <!-- Contenu principal -->
     <div class="content">
-        <img src="https://raw.githubusercontent.com/Cyprdu/Mission-Impossible---The-Final-Reckoning/c8a12f65aced9f16a71da574f2e7b224974f7f32/Sans%20titre%20(1920%20x%20800%20px)%20(1).svg" alt="Mission Impossible Logo" class="movie-logo">
-        <a href="https://www.allocine.fr/film/fichefilm_gen_cfilm=270936.html" class="reserve-button"><b>Réservez vos places</b></a>
-    </div>
-
-    <!-- Section Synopsis -->
-    <div id="synopsis">
-        <div>
-            <img src="https://image.tmdb.org/t/p/original/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Affiche" class="synopsis-poster">
-            <div class="synopsis-text">
-                <h1>Mission: Impossible - The Final Reckoning</h1>
-                <p>
-                    Ethan Hunt et l’équipe du FMI sont chargés de retrouver une arme de destruction massive d’une puissance inédite...
-                </p>
-                <div class="video-button-container">
-                    <a href="#video" class="video-button">Regarder la vidéo</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Conteneur vidéo -->
-    <div class="video-container" id="video">
-        <iframe src="https://www.youtube.com/embed/gRUfxseMlbg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <h2>Synopsis</h2>
+        <p>
+            Ethan Hunt et l’équipe du FMI sont chargés de retrouver une arme de destruction massive d’une puissance inédite...
+        </p>
+        <p>
+            Dans une course effrénée à travers le globe, l’équipe doit affronter des ennemis redoutables et des alliances incertaines.
+        </p>
     </div>
 
     <!-- Pied de page -->
     <footer>
-        <img src="https://dx35vtwkllhj9.cloudfront.net/paramountpictures/mission-impossible-dead-reckoning-part-1/images/legal-logos-intl.png" alt="Logos légaux" class="footer-logo">
+        <img src="https://dx35vtwkllhj9.cloudfront.net/paramountpictures/mission-impossible-dead-reckoning-part-1/images/legal-logos-intl.png" alt="Logos légaux">
     </footer>
- <script>
-        // Gestion du menu déroulant
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
-        const crossIcon = document.getElementById('cross-icon');
 
-        menuToggle.addEventListener('click', () => {
-            menu.style.left = '0';
-            crossIcon.style.display = 'block';
-            menuToggle.style.display = 'none';
-        });
+    <script>
+        // Référence au texte de l'en-tête
+        const headerText = document.getElementById('header-text');
 
-        crossIcon.addEventListener('click', () => {
-            menu.style.left = '100%';
-            crossIcon.style.display = 'none';
-            menuToggle.style.display = 'block';
+        // Fonction pour cacher le texte lorsque la page est scrollée
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            if (scrollPosition > 200) { // Cacher si on scrolle plus de 200px
+                headerText.classList.add('hidden');
+            } else {
+                headerText.classList.remove('hidden');
+            }
         });
     </script>
-
 </body>
 </html>
