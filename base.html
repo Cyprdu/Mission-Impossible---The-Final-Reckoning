@@ -15,62 +15,13 @@
             font-family: 'IMPOS10';
             src: url('IMPOS10_.ttf') format('truetype');
         }
-
-        /* Styles pour la vidéo en arrière-plan */
-        .video-background {
-            position: fixed; /* Reste fixé en arrière-plan */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1; /* Placer la vidéo derrière le contenu principal */
-        }
-
-        #bg-video {
-            object-fit: cover; /* Permet à la vidéo de couvrir toute la zone */
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Styles pour le contenu principal afin de ne pas être masqué par la vidéo */
-        .content {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Autres éléments de style, comme votre menu ou logo, sont également ici */
-        .movie-logo {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-
-        /* Assurez-vous que la vidéo ne provoque pas de défilement sur mobile */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; /* Empêche le défilement */
-        }
-
-        /* Menu et autres éléments */
-        .menu {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 2; /* Assurez-vous que le menu est devant la vidéo */
-        }
-
-        /* Reste du code inchangé... */
     </style>
 </head>
 <body>
 
     <!-- Video Background -->
     <div class="video-background">
-        <video autoplay muted loop id="bg-video">
+        <video autoplay muted loop id="bg-video" playsinline>
             <source src="https://cyprienveyret.my.canva.site/cloud/video/ddb898b808955abd1a13fc718a11a46f.mp4" type="video/mp4">
         </video>
     </div>
@@ -119,7 +70,6 @@
     </div>
 
     <!-- Video Section -->
-    <!-- Conteneur de la vidéo YouTube -->
     <div class="video-container" id="video">
         <iframe src="https://www.youtube.com/embed/gRUfxseMlbg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
