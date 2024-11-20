@@ -1,202 +1,306 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mission: Impossible - The Final Reckoning</title>
-    <link rel="icon" href="favico.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission: Impossible - The Final Reckoning</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favico.png" type="image/png">
 
-    <style>
-        /* Réinitialisation de base */
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: black;
-            color: white;
-            overflow-x: hidden;
-        }
+  <!-- Styles -->
+  <style>
+    @font-face {
+      font-family: 'IMPOS10';
+      src: url('IMPOS10_.ttf') format('truetype');
+    }
 
-        /* Conteneur pour la vidéo */
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            z-index: -1;
-        }
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        #bg-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    body {
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+      background-color: #000;
+    }
 
-        /* En-tête avec le logo en plein écran */
-        .header {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 2;
-        }
+    /* Video Background */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
 
-        .header img {
-            width: 80%; /* Le logo occupe 80% de la largeur de l'écran */
-        }
+    .video-background video {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
 
-        /* Menu Mobile */
-        .menu-icon {
-            display: none;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 3;
-        }
+    /* Main Content */
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
 
-        .menu-icon img {
-            width: 40px;
-        }
+    .movie-logo {
+      width: 80%;
+      max-width: 500px;
+      height: auto;
+    }
 
-        .menu {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: absolute;
-            top: 50px;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.9);
-            width: 100%;
-            height: 100vh;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease-in-out;
-        }
+    /* Menu Icon */
+    .menu-icon {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      z-index: 10;
+    }
 
-        .menu.open {
-            transform: translateY(0);
-        }
+    .menu-icon img {
+      width: 40px;
+      height: 40px;
+    }
 
-        .menu a {
-            text-align: center;
-            padding: 15px;
-            color: white;
-            text-decoration: none;
-            font-size: 1.5rem;
-            border-bottom: 1px solid #555;
-        }
+    /* Cross Icon */
+    .menu-icon-cross {
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      z-index: 10;
+    }
 
-        .menu a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
+    .menu-icon-cross img {
+      width: 40px;
+      height: 40px;
+    }
 
-        /* Contenu principal */
-        .content {
-            padding: 20px;
-            background-color: black;
-            color: white;
-            display: none; /* Contenu caché au début */
-        }
+    /* Sliding Menu */
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 70%;
+      height: 100%;
+      background: #333;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      padding-top: 60px;
+    }
 
-        .content h2 {
-            text-align: center;
-        }
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 20px;
+      display: block;
+      font-size: 20px;
+      text-align: center;
+    }
 
-        .content p {
-            text-align: justify;
-        }
+    .menu a:hover {
+      background-color: #444;
+    }
 
-        /* Pied de page */
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: white;
-        }
+    .menu.active {
+      transform: translateX(0);
+    }
 
-        footer img {
-            width: 80%;
-            max-width: 200px;
-        }
+    /* Reserve Button */
+    .reserve-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: red;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+      text-align: center;
+    }
 
-        /* Ajustements pour les petits écrans */
-        @media (max-width: 768px) {
-            .menu-icon {
-                display: block;
-            }
+    .reserve-button:hover {
+      background-color: darkred;
+    }
 
-            .header img {
-                width: 100%; /* Le logo prend toute la largeur sur mobile */
-            }
-        }
-    </style>
+    /* Synopsis Section */
+    .synopsis {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .synopsis h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .synopsis p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .synopsis img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+    }
+
+    .video-button-container {
+      margin-top: 20px;
+    }
+
+    .video-button {
+      background-color: #ff3b3b;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .video-button:hover {
+      background-color: #c32c2c;
+    }
+
+    /* Video Section */
+    .video-container iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+    }
+
+    footer img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 768px) {
+      .content {
+        width: 100%;
+        top: 30%;
+      }
+
+      .movie-logo {
+        width: 100%;
+        max-width: none;
+        height: auto;
+      }
+
+      .menu {
+        width: 100%;
+        padding-top: 50px;
+      }
+
+      .reserve-button {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Vidéo en arrière-plan -->
-    <div class="video-container">
-        <video autoplay muted loop playsinline id="bg-video">
-            <source src="https://cyprienveyret.my.canva.site/cloud/video/ddb898b808955abd1a13fc718a11a46f.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas les vidéos HTML5.
-        </video>
-    </div>
+  <!-- Video Background -->
+  <div class="video-background">
+    <video autoplay muted loop id="bg-video">
+      <source src="https://cyprienveyret.my.canva.site/cloud/video/ddb898b808955abd1a13fc718a11a46f.mp4" type="video/mp4">
+    </video>
+  </div>
 
-    <!-- En-tête avec le logo -->
-    <div class="header">
-        <img src="https://raw.githubusercontent.com/Cyprdu/Mission-Impossible---The-Final-Reckoning/c8a12f65aced9f16a71da574f2e7b224974f7f32/Sans%20titre%20(1920%20x%20800%20px)%20(1).svg" alt="Mission Impossible Logo">
-    </div>
+  <!-- Main Content -->
+  <div class="content">
+    <img src="https://raw.githubusercontent.com/Cyprdu/Mission-Impossible---The-Final-Reckoning/c8a12f65aced9f16a71da574f2e7b224974f7f32/Sans%20titre%20(1920%20x%20800%20px)%20(1).svg" alt="Mission Impossible Logo" class="movie-logo">
+  </div>
 
-    <!-- Menu Mobile -->
-    <div class="menu-icon" id="menu-toggle">
-        <img src="https://img.icons8.com/m_rounded/512/FFFFFF/menu.png" alt="Menu Icon">
-    </div>
+  <!-- Menu Icon -->
+  <div class="menu-icon" id="menu-toggle">
+    <img src="https://img.icons8.com/m_rounded/512/FFFFFF/menu.png" alt="Menu Icon">
+  </div>
 
-    <!-- Menu -->
-    <nav class="menu" id="menu">
-        <a href="#">Accueil</a>
-        <a href="#synopsis" class="scroll-link">Synopsis</a>
-        <a href="#video">Vidéo</a>
-        <a href="https://www.allocine.fr/film/fichefilm_gen_cfilm=270936.html" target="_blank">Séance</a>
-    </nav>
+  <!-- Cross Icon for Closing Menu -->
+  <div class="menu-icon-cross" id="cross-icon" style="display: none;">
+    <img src="croix.png" alt="Close Icon">
+  </div>
 
-    <!-- Contenu Principal -->
-    <div class="content" id="synopsis">
-        <h2>Synopsis</h2>
+  <!-- Sliding Menu -->
+  <nav class="menu" id="menu">
+    <a href="#" class="active">Accueil</a>
+    <a href="#synopsis" class="scroll-link">Synopsis</a>
+    <a href="#video">Vidéo</a>
+    <a href="https://www.allocine.fr/film/fichefilm_gen_cfilm=270936.html" target="_blank">Séance</a>
+  </nav>
+
+  <!-- Reserve Button -->
+  <a href="https://www.allocine.fr/film/fichefilm_gen_cfilm=270936.html" class="reserve-button"><b>Réservez vos places</b></a>
+
+  <!-- Synopsis Section -->
+  <div id="synopsis" class="synopsis">
+    <div class="synopsis-content">
+      <img src="https://image.tmdb.org/t/p/original/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Affiche" class="synopsis-poster">
+      <div class="synopsis-text">
+        <h1>Mission: Impossible - The Final Reckoning</h1>
         <p>
-            Ethan Hunt et l’équipe du FMI sont chargés de retrouver une arme de destruction massive d’une puissance inédite...
+          Ethan Hunt et l’équipe du FMI sont chargés de retrouver une arme de destruction massive d’une puissance inédite, qui menace l’humanité si elle tombe entre de mauvaises mains. Dans une course effrénée à travers le globe, l’équipe doit affronter des ennemis redoutables et des alliances incertaines, tout en étant confrontée à des pièges mortels et des trahisons. Avec l’avenir du monde en jeu, chaque seconde compte, et les agents devront faire face à des choix impossibles pour empêcher la catastrophe mondiale imminente.
         </p>
-        <p>
-            Dans une course effrénée à travers le globe, l’équipe doit affronter des ennemis redoutables et des alliances incertaines.
-        </p>
+        <div class="video-button-container">
+          <a href="#video" class="video-button">Regarder la vidéo</a>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Pied de page -->
-    <footer>
-        <img src="https://dx35vtwkllhj9.cloudfront.net/paramountpictures/mission-impossible-dead-reckoning-part-1/images/legal-logos-intl.png" alt="Logos légaux">
-    </footer>
+  <!-- Video Section -->
+  <div class="video-container" id="video">
+    <iframe src="https://www.youtube.com/embed/gRUfxseMlbg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
 
-    <script>
-        // Menu mobile
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
-        
-        menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('open');
-        });
+  <!-- Footer -->
+  <footer>
+    <img src="https://dx35vtwkllhj9.cloudfront.net/paramountpictures/mission-impossible-dead-reckoning-part-1/images/legal-logos-intl.png" alt="Logos légaux" class="footer-logo">
+  </footer>
 
-        // Effet de disparition de la vidéo lors du défilement
-        const videoContainer = document.querySelector('.video-container');
-        const content = document.querySelector('.content');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) { // Lorsque l'utilisateur défile de 300px
-                videoContainer.style.display = 'none'; // Cacher la vidéo
-                content.style.display = 'block'; // Afficher le contenu
-            } else {
-                videoContainer.style.display = 'block'; // Afficher la vidéo
-                content.style.display = 'none'; // Cacher le contenu
-            }
-        });
-    </script>
+  <!-- Scripts -->
+  <script>
+    // Menu toggle script
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('menu').classList.toggle('active');
+      document.getElementById('menu-toggle').style.display = 'none';
+      document.getElementById('cross-icon').style.display = 'block';
+    });
+
+    // Close menu script
+    document.getElementById('cross-icon').addEventListener('click', function() {
+      document.getElementById('menu').classList.remove('active');
+      document.getElementById('menu-toggle').style.display = 'block';
+      document.getElementById('cross-icon').style.display = 'none';
+    });
+  </script>
+
 </body>
 </html>
