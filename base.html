@@ -4,37 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mission: Impossible - Mobile</title>
-
-    <!-- Favicon -->
     <link rel="icon" href="favico.png" type="image/png">
 
     <style>
-        /* Importation de la police */
-        @font-face {
-            font-family: 'IMPOS10';
-            src: url('IMPOS10_.ttf') format('truetype');
-        }
-
         /* Réinitialisation de base */
         body, html {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            box-sizing: border-box;
             overflow-x: hidden;
+            font-family: Arial, sans-serif;
             background-color: black;
             color: white;
         }
 
-        /* Vidéo en arrière-plan */
+        /* Conteneur vidéo de fond */
         .video-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             z-index: -1;
+            overflow: hidden;
         }
 
         #bg-video {
@@ -46,6 +37,8 @@
         /* Contenu principal */
         .content {
             text-align: center;
+            position: relative;
+            z-index: 1;
             padding: 20px;
         }
 
@@ -55,89 +48,39 @@
             margin: 20px auto;
         }
 
-        /* Menu hamburger */
-        .menu-icon, .menu-icon-cross {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-        }
-
-        .menu-icon img, .menu-icon-cross img {
-            width: 100%;
-            height: auto;
-        }
-
-        /* Menu déroulant */
-        .menu {
-            position: fixed;
-            top: 0;
-            left: 100%;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.95);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.5rem;
-            margin: 15px 0;
-        }
-
-        .menu a.active {
-            color: red;
-        }
-
-        /* Bouton de réservation */
         .reserve-button {
             display: block;
-            text-align: center;
-            padding: 10px 20px;
             margin: 20px auto;
-            font-size: 1.2rem;
+            padding: 10px 20px;
             background-color: red;
             color: white;
-            border-radius: 5px;
             text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 5px;
             width: 80%;
             max-width: 250px;
         }
 
-        /* Section Synopsis */
+        /* Section synopsis */
         #synopsis {
             padding: 20px;
-        }
-
-        .synopsis-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            text-align: justify;
         }
 
         .synopsis-poster {
             width: 100%;
             max-width: 300px;
-            margin-bottom: 20px;
+            margin: 20px auto;
             border-radius: 10px;
         }
 
         .synopsis-text {
-            text-align: justify;
             font-size: 0.9rem;
         }
 
         /* Bouton vidéo */
         .video-button-container {
+            text-align: center;
             margin-top: 15px;
         }
 
@@ -192,40 +135,21 @@
 
     <!-- Vidéo de fond -->
     <div class="video-background">
-        <video autoplay muted loop id="bg-video">
+        <video autoplay muted loop playsinline id="bg-video">
             <source src="https://cyprienveyret.my.canva.site/cloud/video/ddb898b808955abd1a13fc718a11a46f.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas les vidéos HTML5.
         </video>
     </div>
 
     <!-- Contenu principal -->
     <div class="content">
         <img src="https://raw.githubusercontent.com/Cyprdu/Mission-Impossible---The-Final-Reckoning/c8a12f65aced9f16a71da574f2e7b224974f7f32/Sans%20titre%20(1920%20x%20800%20px)%20(1).svg" alt="Mission Impossible Logo" class="movie-logo">
+        <a href="https://www.allocine.fr/film/fichefilm_gen_cfilm=270936.html" class="reserve-button"><b>Réservez vos places</b></a>
     </div>
 
-    <!-- Menu hamburger -->
-    <div class="menu-icon" id="menu-toggle">
-        <img src="https://img.icons8.com/m_rounded/512/FFFFFF/menu.png" alt="Menu Icon">
-    </div>
-
-    <!-- Croix pour fermer le menu -->
-    <div class="menu-icon-cross" id="cross-icon" style="display: none;">
-        <img src="croix.png" alt="Close Icon">
-    </div>
-
-    <!-- Menu déroulant -->
-    <nav class="menu" id="menu">
-        <a href="#" class="active">Accueil</a>
-        <a href="#synopsis">Synopsis</a>
-        <a href="#video">Vidéo</a>
-        <a href="https://www.allocine.fr/film/fichefilm_gen_cfilm=270936.html" target="_blank">Séance</a>
-    </nav>
-
-    <!-- Bouton de réservation -->
-    <a href="https://www.allocine.fr/film/fichefilm_gen_cfilm=270936.html" class="reserve-button"><b>Réservez vos places</b></a>
-
-    <!-- Synopsis -->
+    <!-- Section Synopsis -->
     <div id="synopsis">
-        <div class="synopsis-content">
+        <div>
             <img src="https://image.tmdb.org/t/p/original/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg" alt="Affiche" class="synopsis-poster">
             <div class="synopsis-text">
                 <h1>Mission: Impossible - The Final Reckoning</h1>
@@ -241,7 +165,7 @@
 
     <!-- Conteneur vidéo -->
     <div class="video-container" id="video">
-        <iframe src="https://www.youtube.com/embed/gRUfxseMlbg" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/gRUfxseMlbg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <!-- Pied de page -->
@@ -249,23 +173,5 @@
         <img src="https://dx35vtwkllhj9.cloudfront.net/paramountpictures/mission-impossible-dead-reckoning-part-1/images/legal-logos-intl.png" alt="Logos légaux" class="footer-logo">
     </footer>
 
-    <script>
-        // Gestion du menu déroulant
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
-        const crossIcon = document.getElementById('cross-icon');
-
-        menuToggle.addEventListener('click', () => {
-            menu.style.left = '0';
-            crossIcon.style.display = 'block';
-            menuToggle.style.display = 'none';
-        });
-
-        crossIcon.addEventListener('click', () => {
-            menu.style.left = '100%';
-            crossIcon.style.display = 'none';
-            menuToggle.style.display = 'block';
-        });
-    </script>
 </body>
 </html>
