@@ -8,7 +8,6 @@ body, html {
     scroll-behavior: smooth;
 }
 
-
 /* Video Background */
 .video-background {
     position: relative;
@@ -39,13 +38,6 @@ body, html {
     max-width: 1000px;
 }
 
-.release-date {
-    font-size: 32px;
-    text-transform: uppercase;
-    margin-top: 15px;
-    font-family: 'IMPOS10', sans-serif;
-}
-
 /* Menu Icon */
 .menu-icon, .menu-icon-cross {
     position: fixed;
@@ -54,6 +46,7 @@ body, html {
     cursor: pointer;
     z-index: 10;
 }
+
 .menu {
     position: fixed;
     top: 0;
@@ -66,34 +59,11 @@ body, html {
     justify-content: center;
     align-items: center;
     transition: left 0.4s;
-    z-index: 50; /* Assurez-vous que cette valeur est plus élevée que celle des autres éléments */
+    z-index: 50; 
 }
 
-.menu-icon, .menu-icon-cross {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-    z-index: 60; /* Assurez que c'est plus élevé que le menu */
-}
-
-.menu-icon img, .menu-icon-cross img {
-    width: 35px; /* Gardez la taille existante */
-}
-
-.menu-icon-cross img {
-    width: 60px;
-    margin-left: -15px;
-}
-
-
-.menu-icon img, .menu-icon-cross img {
-    width: 35px;
-}
-
-.menu-icon-cross img {
-    width: 60px;
-    margin-left: -15px;
+.menu.open {
+    left: 0;
 }
 
 /* Video Section */
@@ -103,8 +73,30 @@ body, html {
     align-items: center;
     background-color: black;
     padding: 50px 20px;
-    margin-top: 30px; /* Espacement entre le synopsis et la vidéo */
+    margin-top: 30px;
 }
+
+.video-container {
+    position: relative;
+    width: 50%;
+    max-width: 800px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    background-color: black;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
 /* Reserve Button */
 .reserve-button {
     position: fixed;
@@ -116,35 +108,15 @@ body, html {
     border-radius: 25px;
     font-size: 16px;
     text-decoration: none;
-    opacity: 1; /* Le bouton est visible au départ */
-    transition: opacity 0.5s ease; /* Transition de fondu en 0.5s */
+    opacity: 1;
+    transition: opacity 0.5s ease;
 }
 
-/* Lorsque l'on atteint le synopsis, on rend le bouton invisible */
 .reserve-button.hidden {
-    opacity: 0; /* Le bouton devient invisible */
+    opacity: 0;
 }
 
-.menu {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    height: 100vh;
-    width: 250px;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: left 0.4s;
-    z-index: 50;
-}
-
-.menu.open {
-    left: 0;
-}
-
-
+/* Sliding Menu */
 .menu-icon, .menu-icon-cross {
     position: fixed;
     top: 20px;
@@ -162,216 +134,76 @@ body, html {
     margin-left: -15px;
 }
 
-
-.video-section iframe {
-    width: 80%; /* Vous pouvez ajuster la largeur de la vidéo */
-    max-width: 960px; /* Limite de la largeur pour ne pas que la vidéo devienne trop grande */
-    height: 500px; /* Ajustez la hauteur de la vidéo */
-    border-radius: 20px; /* Coins arrondis */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Ombre douce pour donner du relief */
-}
-
-/* Sliding Menu */
-.menu {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    height: 100vh;
-    width: 250px;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: left 0.4s;
-}
-
-.menu a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    margin: 15px 0;
-}
-
-.menu.open {
-    left: 0;
-}
-
-/* Reserve Button */
-.reserve-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: red;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-size: 16px;
-    text-decoration: none;
-}
-
-/* Synopsis Section */
-.synopsis {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    color: white;
-    padding: 50px 20px;
-    position: relative;
-    width: 100%;
-}
-
-.synopsis-content {
-    display: flex;
-    align-items: center;
-    width: 80%;
-}
-
-.synopsis-text {
-    width: 50%;
-    padding-left: 20px;
-}
-
-.synopsis-text h1 {
-    font-size: 32px;
-    font-family: 'IMPOS10', sans-serif;
-}
-
-.synopsis-text p {
-    font-size: 18px;
-}
-
-.synopsis-poster {
-    width: 30%;
-    margin-right: 30px;
-    border-radius: 10px;
-}
-
-/* Styles par défaut pour les écrans de taille normale */
-.synopsis-content {
-    display: flex;
-    align-items: center;
-    width: 80%;
-}
-
-.synopsis-poster {
-    width: 30%;
-    margin-right: 30px;
-    border-radius: 10px;
-}
-
-.synopsis-text {
-    width: 50%;
-    padding-left: 20px;
-}
-
-/* Media query pour les petits écrans */
-@media (max-width: 768px) {
-    /* Empile le poster au-dessus du texte */
-    .synopsis-content {
-        flex-direction: column; /* Empile les éléments verticalement */
-        align-items: center; /* Centre les éléments */
-        text-align: center; /* Centrer le texte */
-    }
-
-    .synopsis-poster {
-        width: 60%; /* Ajuste la taille de l'image pour petits écrans */
-        margin: 0 0 20px 0; /* Ajoute de l'espace en bas de l'image */
-    }
-
-    .synopsis-text {
-        width: 100%; /* Utilise toute la largeur pour le texte */
-        padding-left: 0; /* Retire le padding à gauche */
-    }
-}
-
-.video-background, #bg-video {
-    width: 100vw; /* Assurez que la vidéo couvre l'écran sans débordement */
-    max-width: 100%;
-    overflow: hidden; /* Cache tout débordement éventuel */
-}
-
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Empêche le défilement horizontal */
-}
-
-/* Pied de page */
+/* Footer */
 footer {
-    text-align: center;  /* Centrer l'image */
-    margin-top: 50px;     /* Espacer le pied de page du reste du contenu */
-    padding: 20px 0;      /* Espacement interne pour le footer */
-    background-color: #000;  /* Fond noir pour le pied de page */
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px 0;
+    background-color: #000;
 }
 
 .footer-logo {
-    max-width: 85%; /* Pour que l'image ne dépasse pas la largeur de la page */
-    height: auto;    /* Assurez-vous que l'image garde ses proportions */
+    max-width: 85%;
+    height: auto;
 }
 
-/* Conteneur pour le bouton vidéo */
+/* Video Button */
 .video-button-container {
-    text-align: left; /* Par défaut, le bouton est aligné à gauche */
-    margin-top: 30px;  /* Ajoute un espacement au-dessus du bouton */
+    text-align: left;
+    margin-top: 30px;
 }
 
-/* Style du bouton vidéo */
 .video-button {
     display: inline-block;
-    background-color: red; /* Couleur de fond du bouton */
-    color: white;          /* Couleur du texte */
-    font-size: 18px;       /* Taille du texte */
-    padding: 15px 30px;    /* Espacement interne du bouton */
-    text-decoration: none; /* Retirer le soulignement du lien */
-    border-radius: 25px;   /* Coins arrondis */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Ombre sous le bouton */
-    transition: background-color 0.3s, transform 0.2s; /* Effet de transition */
+    background-color: red;
+    color: white;
+    font-size: 18px;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Effet au survol du bouton */
 .video-button:hover {
-    background-color: #d32f2f; /* Changer la couleur du bouton au survol */
-    transform: translateY(-5px); /* Ajouter un léger effet de déplacement */
+    background-color: #d32f2f;
+    transform: translateY(-5px);
 }
 
 .video-button:active {
-    transform: translateY(2px); /* Effet au clic */
+    transform: translateY(2px);
 }
 
-/* Media Query pour les écrans plus petits */
+/* Media Queries */
 @media (max-width: 768px) {
     .video-button-container {
-        text-align: center; /* Centre le bouton sur les écrans petits */
+        text-align: center;
     }
 
     .video-button {
-        display: block; /* Affiche le bouton comme un bloc pour qu'il occupe toute la largeur disponible */
-        width: 80%;      /* Réduit la largeur du bouton sur les petits écrans */
-        margin: 20px auto; /* Centre le bouton avec une marge automatique */
+        display: block;
+        width: 80%;
+        margin: 20px auto;
     }
-}
-/* Conteneur pour la vidéo YouTube avec ratio 16:9 */
-/* Conteneur pour la vidéo YouTube avec ratio 16:9 */
-.video-container {
-    position: relative;
-    width: 50%; /* Prendre 1/3 de la largeur de l'écran */
-    max-width: 800px; /* Largeur maximale de la vidéo */
-    margin: 0 auto; /* Centrer horizontalement le conteneur */
-    aspect-ratio: 16 / 9; /* Maintien du ratio 16:9 */
-    background-color: black; /* Fond noir pour la vidéo avant le chargement */
-    border-radius: 15px; /* Coins arrondis pour le conteneur */
-    overflow: hidden; /* Masquer les débordements */
-    margin-top: 30px; /* Espacement au-dessus */
-}
 
-/* Style de l'iframe pour l'adapter à l'intérieur du conteneur */
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* La largeur de l'iframe prend toute la largeur du conteneur */
-    height: 100%; /* La hauteur de l'iframe prend toute la hauteur calculée par le ratio */
-    border-radius: 15px; /* Coins arrondis pour l'iframe */
+    .synopsis-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .synopsis-poster {
+        width: 60%;
+        margin: 0 0 20px 0;
+    }
+
+    .synopsis-text {
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .movie-logo {
+        max-width: 800px;
+    }
 }
