@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mission: Impossible - Mobile</title>
+    <title>Mission: Impossible - The Final Reckoning</title>
     <link rel="icon" href="favico.png" type="image/png">
 
     <style>
@@ -11,38 +11,21 @@
         body, html {
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
             font-family: Arial, sans-serif;
             background-color: black;
             color: white;
+            overflow-x: hidden;
         }
 
-        /* Conteneur pour le header (texte) */
-        .header {
-            position: relative;
-            text-align: center;
-            padding: 50px 20px;
-            background-color: black;
-            z-index: 2;
-        }
-
-        .header h1 {
-            font-size: 2rem;
-            margin: 0;
-            color: red;
-        }
-
-        .header p {
-            font-size: 1rem;
-            color: white;
-        }
-
-        /* Vidéo en arrière-plan */
+        /* Conteneur pour la vidéo */
         .video-container {
-            position: sticky;
+            position: absolute;
             top: 0;
+            left: 0;
+            width: 100%;
             height: 100vh;
             overflow: hidden;
+            z-index: -1;
         }
 
         #bg-video {
@@ -51,54 +34,107 @@
             object-fit: cover;
         }
 
-        /* Contenu sous la vidéo */
+        /* En-tête avec le logo en plein écran */
+        .header {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+        }
+
+        .header img {
+            width: 80%; /* Le logo occupe 80% de la largeur de l'écran */
+        }
+
+        /* Menu Mobile */
+        .menu-icon {
+            display: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 3;
+        }
+
+        .menu-icon img {
+            width: 40px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            width: 100%;
+            height: 100vh;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .menu.open {
+            transform: translateY(0);
+        }
+
+        .menu a {
+            text-align: center;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #555;
+        }
+
+        .menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Contenu principal */
         .content {
             padding: 20px;
             background-color: black;
+            color: white;
+            display: none; /* Contenu caché au début */
         }
 
         .content h2 {
             text-align: center;
-            color: white;
         }
 
         .content p {
-            color: white;
             text-align: justify;
-        }
-
-        /* Effet JavaScript : texte caché avec opacité */
-        .fade-text {
-            opacity: 1;
-            transition: opacity 0.5s;
-        }
-
-        .fade-text.hidden {
-            opacity: 0;
         }
 
         /* Pied de page */
         footer {
             text-align: center;
-            padding: 10px;
+            padding: 20px;
+            color: white;
         }
 
         footer img {
             width: 80%;
             max-width: 200px;
         }
+
+        /* Ajustements pour les petits écrans */
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+
+            .header img {
+                width: 100%; /* Le logo prend toute la largeur sur mobile */
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- En-tête avec le texte principal -->
-    <div class="header fade-text" id="header-text">
-        <h1>Tom Cruise</h1>
-        <p>Mission: Impossible - The Final Reckoning</p>
-        <p>Le 23.06.2025 en France</p>
-    </div>
-
-    <!-- Vidéo qui disparaît lors du défilement -->
+    <!-- Vidéo en arrière-plan -->
     <div class="video-container">
         <video autoplay muted loop playsinline id="bg-video">
             <source src="https://cyprienveyret.my.canva.site/cloud/video/ddb898b808955abd1a13fc718a11a46f.mp4" type="video/mp4">
@@ -106,8 +142,26 @@
         </video>
     </div>
 
-    <!-- Contenu principal -->
-    <div class="content">
+    <!-- En-tête avec le logo -->
+    <div class="header">
+        <img src="https://raw.githubusercontent.com/Cyprdu/Mission-Impossible---The-Final-Reckoning/c8a12f65aced9f16a71da574f2e7b224974f7f32/Sans%20titre%20(1920%20x%20800%20px)%20(1).svg" alt="Mission Impossible Logo">
+    </div>
+
+    <!-- Menu Mobile -->
+    <div class="menu-icon" id="menu-toggle">
+        <img src="https://img.icons8.com/m_rounded/512/FFFFFF/menu.png" alt="Menu Icon">
+    </div>
+
+    <!-- Menu -->
+    <nav class="menu" id="menu">
+        <a href="#">Accueil</a>
+        <a href="#synopsis" class="scroll-link">Synopsis</a>
+        <a href="#video">Vidéo</a>
+        <a href="https://www.allocine.fr/film/fichefilm_gen_cfilm=270936.html" target="_blank">Séance</a>
+    </nav>
+
+    <!-- Contenu Principal -->
+    <div class="content" id="synopsis">
         <h2>Synopsis</h2>
         <p>
             Ethan Hunt et l’équipe du FMI sont chargés de retrouver une arme de destruction massive d’une puissance inédite...
@@ -123,16 +177,24 @@
     </footer>
 
     <script>
-        // Référence au texte de l'en-tête
-        const headerText = document.getElementById('header-text');
+        // Menu mobile
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+        
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('open');
+        });
 
-        // Fonction pour cacher le texte lorsque la page est scrollée
+        // Effet de disparition de la vidéo lors du défilement
+        const videoContainer = document.querySelector('.video-container');
+        const content = document.querySelector('.content');
         window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY;
-            if (scrollPosition > 200) { // Cacher si on scrolle plus de 200px
-                headerText.classList.add('hidden');
+            if (window.scrollY > 300) { // Lorsque l'utilisateur défile de 300px
+                videoContainer.style.display = 'none'; // Cacher la vidéo
+                content.style.display = 'block'; // Afficher le contenu
             } else {
-                headerText.classList.remove('hidden');
+                videoContainer.style.display = 'block'; // Afficher la vidéo
+                content.style.display = 'none'; // Cacher le contenu
             }
         });
     </script>
