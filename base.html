@@ -172,6 +172,24 @@
     <footer>
         <img src="https://dx35vtwkllhj9.cloudfront.net/paramountpictures/mission-impossible-dead-reckoning-part-1/images/legal-logos-intl.png" alt="Logos légaux" class="footer-logo">
     </footer>
+ <script>
+        // Gestion du menu déroulant
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+        const crossIcon = document.getElementById('cross-icon');
+
+        menuToggle.addEventListener('click', () => {
+            menu.style.left = '0';
+            crossIcon.style.display = 'block';
+            menuToggle.style.display = 'none';
+        });
+
+        crossIcon.addEventListener('click', () => {
+            menu.style.left = '100%';
+            crossIcon.style.display = 'none';
+            menuToggle.style.display = 'block';
+        });
+    </script>
 
 </body>
 </html>
